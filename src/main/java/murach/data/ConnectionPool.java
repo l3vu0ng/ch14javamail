@@ -46,6 +46,19 @@ public class ConnectionPool {
 
         // 2. Fallback: Hỗ trợ kết nối trực tiếp khi hosting trên Cloud hoặc chạy ngoài JNDI
         String dbUrl = System.getenv("DB_URL");
+        String dbUser = System.getenv("DB_USER");
+        String dbPassword = System.getenv("DB_PASSWORD");
+
+        // Tự động nhận diện cấu hình Clever Cloud MySQL Add-on nếu có
+        String ccHost = System.getenv("MYSQL_ADDON_HOST");
+        if (ccHost != null && !ccHost.isBlank()) {
+            String ccPort = System.getenv("MYSQL_ADDON_PORT");
+            String ccDb = System.getenv("MYSQL_ADDON_DB");
+            dbUrl = "jdbc:mysql://" + ccHost + ":" + ccPort + "/" + ccDb + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            dbUser = System.getenv("MYSQL_ADDON_USER");
+            dbPassword = System.getenv("MYSQL_ADDON_PASSWORD");
+        }
+
         if (dbUrl == null || dbUrl.isBlank()) {
             dbUrl = System.getenv("DATABASE_URL");
         }
@@ -57,12 +70,10 @@ public class ConnectionPool {
             dbUrl = "jdbc:mysql://localhost:3306/murach?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
         }
 
-        String dbUser = System.getenv("DB_USER");
         if (dbUser == null || dbUser.isBlank()) {
             dbUser = "root";
         }
 
-        String dbPassword = System.getenv("DB_PASSWORD");
         if (dbPassword == null) {
             dbPassword = "0774551185aA";
         }
