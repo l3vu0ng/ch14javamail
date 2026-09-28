@@ -50,9 +50,9 @@ public class EmailListServlet extends HttpServlet {
 
             // send email to user
             String to = email;
-            String from = "email_list@murach.com";
+            String from = "volevuong2006@gmail.com";
 
-            // Nếu người dùng cấu hình tài khoản Gmail thực tế từ biến môi trường
+            // Nếu người dùng cấu hình tài khoản Gmail khác từ biến môi trường
             String envUser = System.getenv("GMAIL_USERNAME");
             if (envUser != null && !envUser.isBlank()) {
                 from = envUser;

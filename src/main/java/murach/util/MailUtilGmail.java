@@ -1,8 +1,14 @@
 package murach.util;
 
 import java.util.Properties;
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
+
+import jakarta.mail.Address;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 public class MailUtilGmail {
 
@@ -10,15 +16,15 @@ public class MailUtilGmail {
             String subject, String body, boolean bodyIsHTML)
             throws MessagingException {
 
-        // Lấy thông tin xác thực từ biến môi trường hoặc biến hệ thống (đặc biệt hữu ích khi hosting)
+        // Lấy thông tin xác thực từ biến môi trường hoặc dùng tài khoản cấu hình mặc định
         String username = System.getenv("GMAIL_USERNAME");
         if (username == null || username.isBlank()) {
-            username = System.getProperty("mail.gmail.username", from);
+            username = System.getProperty("mail.gmail.username", "volevuong2006@gmail.com");
         }
 
         String password = System.getenv("GMAIL_APP_PASSWORD");
         if (password == null || password.isBlank()) {
-            password = System.getProperty("mail.gmail.password", "sesame");
+            password = System.getProperty("mail.gmail.password", "ahoiutdmolpwqpcn");
         }
 
         sendMail(to, from, subject, body, bodyIsHTML, username, password);
