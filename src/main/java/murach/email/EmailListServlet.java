@@ -3,6 +3,7 @@ package murach.email;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import murach.business.User;
 import murach.data.UserDB;
 import murach.util.MailUtilGmail;
-import murach.util.MailUtilLocal;
 
 @WebServlet("/emailList")
 public class EmailListServlet extends HttpServlet {
@@ -69,7 +69,6 @@ public class EmailListServlet extends HttpServlet {
                     + "Mike Murach & Associates";
             boolean isBodyHTML = false;
 
-            // Gửi email qua Gmail SMTP thực tế theo Slide 27-28
             try {
                 MailUtilGmail.sendMail(to, from, subject, body, isBodyHTML);
                 request.setAttribute("mailSuccess", "Email xác nhận đã được gửi thành công đến: " + to);

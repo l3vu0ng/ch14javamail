@@ -35,7 +35,6 @@ public class MailUtilGmail {
             String username, String password)
             throws MessagingException {
 
-        // 1 - get a mail session (theo chuẩn Slide 27-28 & tương thích Gmail SSL hiện đại)
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtps");
         props.put("mail.smtps.host", "smtp.gmail.com");
@@ -44,6 +43,14 @@ public class MailUtilGmail {
         props.put("mail.smtps.quitwait", "false");
         props.put("mail.smtps.ssl.enable", "true");
         props.put("mail.smtps.ssl.trust", "smtp.gmail.com");
+
+        // Timeout 7 giây để tránh xoay vòng vô hạn nếu cloud/mạng chặn cổng SMTP
+        props.put("mail.smtps.connectiontimeout", "7000");
+        props.put("mail.smtps.timeout", "7000");
+        props.put("mail.smtps.writetimeout", "7000");
+        props.put("mail.smtp.connectiontimeout", "7000");
+        props.put("mail.smtp.timeout", "7000");
+        props.put("mail.smtp.writetimeout", "7000");
 
         Session session = Session.getInstance(props);
         session.setDebug(true);

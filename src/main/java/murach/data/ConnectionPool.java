@@ -67,7 +67,13 @@ public class ConnectionPool {
             dbPassword = "0774551185aA";
         }
 
+        // Đảm bảo có timeout để không bị treo vô hạn trên Cloud nếu DB không phản hồi
+        if (!dbUrl.contains("connectTimeout")) {
+            dbUrl += (dbUrl.contains("?") ? "&" : "?") + "connectTimeout=3000&socketTimeout=4000";
+        }
+
         try {
+            DriverManager.setLoginTimeout(3);
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
         } catch (ClassNotFoundException cnfe) {
