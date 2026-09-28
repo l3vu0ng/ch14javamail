@@ -1,6 +1,6 @@
--- Script khởi tạo cơ sở dữ liệu murach và bảng User cho bài tập Email List
-CREATE DATABASE IF NOT EXISTS murach;
-USE murach;
+-- Script tạo bảng User cho bài tập Email List
+-- Lưu ý: Trên Cloud (như Clever Cloud/Aiven), bạn đã ở sẵn trong database được cấp,
+-- không cần và không được dùng lệnh CREATE DATABASE.
 
 CREATE TABLE IF NOT EXISTS User (
     UserID INT NOT NULL AUTO_INCREMENT,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS User (
     PRIMARY KEY (UserID)
 );
 
--- Dữ liệu mẫu (nếu cần)
+-- Dữ liệu mẫu ban đầu
 INSERT INTO User (Email, FirstName, LastName) VALUES
 ('johnsmith@hotmail.com', 'John', 'Smith'),
 ('andrea@murach.com', 'Andrea', 'Steelman')
