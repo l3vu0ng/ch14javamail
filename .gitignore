@@ -1,1 +1,8 @@
-/docs
+target/
+docs/
+aiven_pass.txt
+.idea/
+*.iml
+nbproject/private/
+.DS_Store
+Thumbs.db

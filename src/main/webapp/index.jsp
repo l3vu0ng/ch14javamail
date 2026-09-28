@@ -16,11 +16,6 @@
         <label>Last Name:</label>
         <input type="text" name="lastName" required><br>
 
-        <label>Mail Server:</label>
-        <select name="mailMode">
-            <option value="gmail" selected>Gmail SMTP (smtp.gmail.com - Slide 27)</option>
-            <option value="local">Local SMTP (localhost:25 - Slide 21)</option>
-        </select><br>
 
         <label>&nbsp;</label>
         <input type="submit" value="Join Now" id="submit">

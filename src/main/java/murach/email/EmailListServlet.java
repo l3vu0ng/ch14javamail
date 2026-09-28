@@ -69,14 +69,9 @@ public class EmailListServlet extends HttpServlet {
                     + "Mike Murach & Associates";
             boolean isBodyHTML = false;
 
-            // Kiểm tra tùy chọn gửi mail (mặc định gửi Gmail thực tế theo Slide 27-28)
-            String mailMode = request.getParameter("mailMode"); // "local" hoặc "gmail"
+            // Gửi email qua Gmail SMTP thực tế theo Slide 27-28
             try {
-                if ("local".equalsIgnoreCase(mailMode)) {
-                    MailUtilLocal.sendMail(to, from, subject, body, isBodyHTML);
-                } else {
-                    MailUtilGmail.sendMail(to, from, subject, body, isBodyHTML);
-                }
+                MailUtilGmail.sendMail(to, from, subject, body, isBodyHTML);
                 request.setAttribute("mailSuccess", "Email xác nhận đã được gửi thành công đến: " + to);
             } catch (MessagingException e) {
                 String errorMessage
